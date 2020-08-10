@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 插值绑定 -->
+        <p>{{name}}</p>
+
+        <!-- 指令解析 -->
+        <p r-text="name"></p>
+
+
+        <p>{{age}}</p>
+
+        <p>{{doubleAge}}</p>
+
+        <!-- 双向绑定 -->
+        <input type="text" r-model="name" />
+        <!-- 事件处理 -->
+        <button @click="changeName">呵呵</button>
+        <!-- html内容解析 -->
+        <div r-html="html"></div>
+      </div>
+      <script src="./src/compile.js"></script>
+      <script src="./src/rain-vue.js"></script>
+
+      <script>
+        const myVue = new RainVue({
+          el: "#app",
+          data: {
+            name: "I am rain-vue",
+            age: 18,
+            html: "<button>这是一个按钮</button>",
+            test: "我是测试数据",
+            foo: {
+                bar: "bar,bar,la...."
+            }
+          },
+          computed: {
+            doubleAge: ()=> { 
+                console.log(this)
+                return 4 * 2
+            }
+          },
+          created() {
+            console.log("开始啦！！！");
+            setTimeout(() => {
+              this.name = "我是rain-vue";
+            }, 1500);
+          },
+          methods: {
+            changeName() {
+              this.name = "我是bigger-rain";
+              this.age = 28;
+            }
+          }
+        });
+      </script>
+</body>
+</html>
